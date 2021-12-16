@@ -32,7 +32,18 @@ const Query = {
     async allPerformanceReviews() {
         const reviews = await ReviewRepo.getAllReviews();
         return reviews;
-    }
+    },
+    async myNeedWriteReviews(parent: any, args: any, context: any) {
+        const userId = context.user.subject;
+        const feedbacks = await FeedbackRepo.getUnCommentFeebacksByWriterId(userId);
+        const reviewIds = feedbacks.map(feedback => feedback.reviewId);
+        if (!reviewIds.length) {
+            return [];
+        }
+
+        const reviews = await ReviewRepo.getReviewsByIds(reviewIds)
+        return reviews;
+    },
 };
 
 const Mutation = {
@@ -185,7 +196,7 @@ const Mutation = {
     },
 
 
-    async submitFeedback(parent: any, args: any) {
+    async submitFeedback(parent: any, args: any, context) {
         const {
             id,
             comment
@@ -193,6 +204,9 @@ const Mutation = {
 
         const feedback = await FeedbackRepo.getFeedback(id);
         if (!feedback) {
+            return new UserInputError('not found the feedback');
+        }
+        if (feedback.writerId != context.user.subject) {
             return new UserInputError('not found the feedback');
         }
 

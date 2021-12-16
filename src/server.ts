@@ -11,6 +11,12 @@ import { PORT, JWT_SECRET } from './env';
 import * as User from './repositories/user';
 import * as Feedback from './repositories/feedback';
 
+// CORS configuration
+const corsOptions = {
+  origin: 'https://performance-reviews-vue.herokuapp.com',
+  credentials: true
+};
+
 export default async function startApolloServer(typeDefs: any, resolvers: any) {
   // Required logic for integrating with Express
   const app = express();
@@ -63,7 +69,7 @@ export default async function startApolloServer(typeDefs: any, resolvers: any) {
 
   // More required logic for integrating with Express
   await server.start();
-  server.applyMiddleware({ app, path: '/' });
+  server.applyMiddleware({ app, path: '/', cors: corsOptions });
 
   // Modified server startup
   await new Promise<void>(resolve => httpServer.listen({ port: PORT }, resolve));

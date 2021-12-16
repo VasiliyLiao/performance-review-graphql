@@ -37,6 +37,7 @@ export default shield(
             me: isAuthenticated,
             allEmployees: isAdmin,
             allPerformanceReviews: isAdmin,
+            myNeedWriteReviews: isEmployee,
         },
         Mutation: {
             createEmployee: isAdmin,

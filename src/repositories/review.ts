@@ -4,6 +4,13 @@ import Review from '../entities/review';
 export const getAllReviews = () => 
     Review.findAll();
 
+export const getReviewsByIds = (ids) => 
+    Review.findAll({
+        where: {
+            id: ids,
+        }
+    });
+
 export const getReview = (id: Identifier) =>
     Review.findByPk(id);
 

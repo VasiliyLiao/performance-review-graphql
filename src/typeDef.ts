@@ -41,6 +41,7 @@ type Query {
 
     # reviews
     allPerformanceReviews: [PerformanceReview!]
+    myNeedWriteReviews: [PerformanceReview!]
 }
 
 type Mutation {

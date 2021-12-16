@@ -11,6 +11,14 @@ export const getFeebacksByReviewId = (reviewIds: any) =>
         }
     });
 
+export const getUnCommentFeebacksByWriterId = (writerId: number) => 
+    Feedback.findAll({
+        where: {
+            writerId: writerId,
+            comment: null,
+        }
+    });
+
 export const deleteManyFeedbacks = (ids: Identifier[], transaction: Transaction|null|undefined) => 
     Feedback.destroy({
         where: {
