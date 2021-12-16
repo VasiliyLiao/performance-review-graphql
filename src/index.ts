@@ -1,10 +1,6 @@
-import { loadSchemaSync } from '@graphql-tools/load';
-import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
-import { join } from 'path';
 import startApolloServer from "./server";
 import resolvers from './resolvers';
+import typeDefs from './typeDef';
 
-const schema = loadSchemaSync(join(__dirname, 'schema.graphql'), { loaders: [new GraphQLFileLoader()] });
-
-startApolloServer(schema, resolvers)
+startApolloServer(typeDefs, resolvers)
     .catch(error => console.error(error));

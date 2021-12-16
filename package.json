@@ -4,7 +4,9 @@
   "description": "interview code",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node src/index.ts",
+    "postinstall": "tsc",
+    "start": "node dist/index.js",
+    "startByTS": "ts-node src/index.ts",
     "lint": "eslint . --ext .ts",
     "fix-lint": "eslint --fix --ext .ts",
     "test": "jest"

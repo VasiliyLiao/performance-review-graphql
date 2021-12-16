@@ -1,3 +1,8 @@
+
+   
+import { gql } from "apollo-server-express";
+
+export default gql `
 type User{
     id: ID!
     name: String
@@ -53,3 +58,4 @@ type Mutation {
     deletePerformancereview(id: ID!): Int
     submitFeedback(id: ID!, comment: String): Boolean
 }
+`
